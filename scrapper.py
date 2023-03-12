@@ -24,9 +24,6 @@ class JumiaScraper(Scraper):
 
     def extract_products(self, country: str) -> List[Product]:
         url = self.base_url.format(country)
-        # headers = requests.utils.default_headers()
-        # headers.update(self.header)
-        # html = requests.get(url, headers=headers).text
 
         driver = webdriver.Chrome()
         driver.get(url)
