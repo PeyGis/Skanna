@@ -5,7 +5,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from base_scrapper import ProductScraper
 from product import Product
-
+from utils import *
 
 
 class JijiScraper(ProductScraper):
@@ -38,7 +38,7 @@ class JijiScraper(ProductScraper):
             soup = BeautifulSoup(self.driver.page_source, 'html.parser')
             try:
                 title = soup.find('div', {'class': 'b-advert-title-inner qa-advert-title b-advert-title-inner--h1'}).text.strip()
-                price = float(soup.find("span", {"class": "qa-advert-price-view-title b-alt-advert-price__text"}).text.replace(",", "").replace("GH₵", ""))
+                price = extract_price(soup.find("span", {"class": "qa-advert-price-view-title b-alt-advert-price__text"}).text)
                 print(f"Title: {title}, Price: {price}")
                 products.append(Product(url, title, price, "Jiji"))
             except:
